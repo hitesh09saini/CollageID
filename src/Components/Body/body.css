@@ -1,0 +1,39 @@
+.body-cont {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    /* background: #000; */
+}
+
+.body-cont input[type="search"] {
+    width: 80%;
+    outline: none;
+    font-size: 25px;
+    padding: 5px;
+    padding-left: 10px;
+
+}
+
+.input {
+    width: 500px;
+    background: #4f126b;
+    padding: 2px;
+    padding-left: 10px;
+}
+
+
+@media screen and (max-width:710px) {
+
+    .body-cont>input[type="search"]
+    {
+        width: 70%;
+    }
+
+    .input{
+        width: 80%;
+    }
+
+}
