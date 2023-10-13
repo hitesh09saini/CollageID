@@ -5,11 +5,12 @@ import Body from './Components/Body/Body';
 import Footer from './Components/Footer/Footer';
 
 function App() {
+
   return (
     <div className=" ">
-      <Header></Header>
-      <Body></Body>
-      <Footer></Footer>
+      <Header/>
+      <Body />
+      <Footer/>
     </div>
   );
 }
