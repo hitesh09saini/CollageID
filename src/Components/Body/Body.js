@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-// import Colleges from '../Colleges/Colleges';
+import Colleges from '../Colleges/Colleges';
 import '../../App.css'
 import './body.css';
 const Body = () => {
@@ -32,10 +32,10 @@ const Body = () => {
         <div className='body-cont'>
             <div className="plus"><i className="fa-solid fa-address-card fa-2xl" style={{ color: "#2a092a" }}></i></div>
             <div className="cont-search">
-                <div className='input'>
+                <div className='input' >
                     <input type="search" id="search" value={input}  onChange={(e) => handleInput(e.target.value)} name="search" placeholder='Search College' />
                     <div className='icons'>
-                        <i className="fa-solid fa-magnifying-glass fa-xl" style={{ color: "white" }}></i>
+                        <i className="fa-solid fa-magnifying-glass fa-xl" onClick={()=>fetchData(input)} style={{ color: "white" }}></i>
                     </div>
 
                 </div>
@@ -54,7 +54,7 @@ const Body = () => {
 
             </div>
 
-            {/* <Colleges ></Colleges> */}
+            <Colleges collegeName={"Arya college of engineering"} Api={"https://jsonplaceholder.typicode.com/users"}></Colleges>
 
 
         </div>
