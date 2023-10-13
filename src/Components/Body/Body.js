@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-// import Colleges from '../Colleges/Colleges';
+import Colleges from '../Colleges/Colleges';
 import '../../App.css'
 import './body.css';
 const Body = () => {
@@ -54,7 +54,7 @@ const Body = () => {
 
             </div>
 
-            {/* <Colleges></Colleges> */}
+            <Colleges></Colleges>
 
 
         </div>

@@ -1,10 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import img from '../../assets/img.png'
 import StudentsCard from '../StudentsCard/StudentsCard';
 import './Colleges.css'
 import collegeIMG from '../../assets/collegeImg.jpg'
 
-const Colleges = ({ collegeImg, location }) => {
+const Colleges = ({ collegeImg,collegeName, location, Api }) => {
+
+    const [student, setStudent] = useState();
+    const [data, setData] = useState([]);
+
+    const fetchData = (value) => {
+        fetch(Api).then((res) => res.json())
+            .then((data) => {
+                const result = data.filter((user) => {
+                    return user && user.name && user.name.toLowerCase().includes(value);
+
+                })
+
+                setData(result);
+            });
+    }
+
+    const handleSearchStudent = (name) => {
+        setStudent(name);
+        fetchData(name);
+    }
+
     return (
         <div>
 
@@ -14,13 +35,13 @@ const Colleges = ({ collegeImg, location }) => {
                         <div className="collegeIMG" style={{ backgroundImage: `url(${collegeIMG || collegeImg})` }}></div>
                         <p className='flex gap-[10px] items-center h-fit'><i class="fa-solid fa-location-dot fa-lg" style={{ color: "#37114b" }}></i>{location || "India"}</p>
                     </div>
-                    Arya College of Engineering
+                   {collegeName|| "College Name"}
                 </div>
 
             </div>
             <div className='p-5 border-2 md:flex justify-between'>
 
-                <input placeholder='Search Student' type="text" className='border border-black self-end outline-none p-1 pl-4  rounded-2xl' />
+                <input placeholder='Search Student' value={student} type="text" onChange={(e) => { handleSearchStudent(e.target.value) }} className='border border-black self-end outline-none p-1 pl-4  rounded-2xl' />
 
                 <div className=' w-fit h-fit '>
                     <div className='border h-fit w-fit m-2'>
