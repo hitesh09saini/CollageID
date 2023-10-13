@@ -14,7 +14,6 @@ const Colleges = ({ collegeImg,collegeName, location, Api }) => {
             .then((data) => {
                 const result = data.filter((user) => {
                     return user && user.name && user.name.toLowerCase().includes(value);
-
                 })
 
                 setData(result);
