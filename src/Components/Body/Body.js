@@ -54,7 +54,7 @@ const Body = () => {
 
             </div>
 
-            <Colleges collegeName={"Arya college of engineering"} Api={"https://jsonplaceholder.typicode.com/users"}></Colleges>
+            {/* <Colleges collegeName={"Arya college of engineering"} Api={"https://jsonplaceholder.typicode.com/users"}></Colleges> */}
 
 
         </div>

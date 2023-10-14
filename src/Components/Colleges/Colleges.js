@@ -3,6 +3,8 @@ import img from '../../assets/img.png'
 import StudentsCard from '../StudentsCard/StudentsCard';
 import './Colleges.css'
 import collegeIMG from '../../assets/collegeImg.jpg'
+// import CreateProfie from '../CreateProfile/CreateProfie';
+
 
 const Colleges = ({ collegeImg,collegeName, location, Api }) => {
 
@@ -26,7 +28,7 @@ const Colleges = ({ collegeImg,collegeName, location, Api }) => {
     }
 
     return (
-        <div>
+        <div className='relative'>
 
             <div className="collegeTag bg-gray-500 p-6">
                 <div className=" text-4xl font-bold text-white">
@@ -65,6 +67,7 @@ const Colleges = ({ collegeImg,collegeName, location, Api }) => {
             </div>
 
             <div className='flex flex-wrap gap-5  p-6 justify-center items-center'>
+                {/* <CreateProfie/> */}
                 <StudentsCard Img={img} name="Hitesh" like="5k" branch="cs" Achievements="3rd Rank" skills="Java" likes="Gym" dislikes="weakness" goals="CEO" relationship="Single" />
                 <StudentsCard name="Hitesh" like="5k" branch="cs" Achievements="3rd Rank" skills="Java" likes="Gym" dislikes="weakness" goals="CEO" relationship="Mingle" />
                 <StudentsCard Img={img} name="Hitesh" like="5k" branch="cs" Achievements="3rd Rank" skills="Java" likes="Gym" dislikes="weakness" goals="CEO" relationship="Single" />
