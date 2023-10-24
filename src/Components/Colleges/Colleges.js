@@ -19,7 +19,7 @@ const Colleges = ({ collegeImg,collegeName, location, Api }) => {
                 })
 
                 setData(result);
-            });
+            }).catch((d)=> console.log(d))
     }
 
     const handleSearchStudent = (name) => {
