@@ -30,15 +30,9 @@ const Body = () => {
 
 
     const handleInput = (value) => {
-
         setInput(value);
         fetchData(value);
-
     }
-
-
-
-
 
 
     const handleSearch = (value) => {
