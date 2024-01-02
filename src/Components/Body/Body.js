@@ -1,78 +1,93 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Colleges from '../Colleges/Colleges';
-import '../../App.css'
+import CreateCollege from '../Colleges/CreateCollege';
+import '../../App.css';
 import './body.css';
+import Signin from '../Auth/SigninPage';
 const Body = () => {
-    const [input, setInput] = useState("");
-    const [listResult, setListResult] = useState([]);
+  const [input, setInput] = useState('');
+  const [listResult, setListResult] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [college, setCollege] = useState(null);
+  const [error, setError] = useState('');
 
+  const fetchData = async () => {
+    try {
+      const res = await axios.get('http://localhost:8000/api/v1/college/all');
+      setListResult(res.data);
+    } catch (error) {
+      setError("Error fetching colleges: " + error.message);
+    }
+  };
 
-    const fetchData = (value) => {
+  const handleInput = (value) => {
+    setInput(value);
+    setFilterData(listResult.filter(item => item.name.toLowerCase().includes(value.toLowerCase())));
+  };
 
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then((res) => res.json())
-            .then((json) => {
+  const handleShowCollege = (data) => {
+    setCollege(<Colleges datas={data} />);
+  };
 
-
-                const result = json.filter((user) => {
-                    return user && user.name && user.name.toLowerCase().includes(value);
-                });
-
-                setListResult(result);
-                if (value === "") {
-                    setListResult([]);
-                }
-            }).catch((d)=> console.log(d))
-
-
+  const handleKey = (e) => {
+    if (e.target.key === 'Enter') {
+      handleInput();
+      setInput('')
     }
 
+  }
 
-    const handleInput = (value) => {
-        setInput(value);
-        fetchData(value);
+  useEffect(() => {
+    fetchData();
+    if (filterData.length == 0) {
+      setError('Error')
     }
+  }, [handleInput]);
 
 
-    const handleSearch = (value) => {
-        if (value === 'Leanne Graham') {
-            console.log('yeah i got it');
-        }
-    }
+  return (
+    <div className='body-cont'>
+      <div className="flex flex-col justify-center items-center">
+        <div className='input'>
+          <input
+            type="search"
+            id="search"
+            value={input}
+            onChange={(e) => handleInput(e.target.value)}
+            name="search"
+            placeholder='Search College'
+            onKeyDown={(e) => handleKey(e)}
+          />
+          <div className='icons'>
+            <i
+              className="fa-solid fa-magnifying-glass fa-xl"
+              onClick={() => handleInput(input)}
+              style={{ color: "white" }}
+            ></i>
+          </div>
+        </div>
 
-
-    return (
-        <div className='body-cont'>
-            <div className="plus"><i className="fa-solid fa-address-card fa-2xl" style={{ color: "#2a092a" }}></i></div>
-            <div className="cont-search">
-                <div className='input' >
-                    <input type="search" id="search" value={input} onChange={(e) => handleInput(e.target.value)} name="search" placeholder='Search College' />
-                    <div className='icons'>
-                        <i className="fa-solid fa-magnifying-glass fa-xl" onClick={() => fetchData(input)} style={{ color: "white" }}></i>
-                    </div>
-
-                </div>
-
-                <div className='results-list'>
-                    {
-
-                        listResult.map((val, inx) => {
-                            return <div key={inx} onClick={() => handleSearch(val.name)} value={val.name} >{val.name}</div>;
-                        })
-
-                    }
-
-                </div>
-
-
+        {error && <CreateCollege />}
+        <div className='p-1 flex flex-col gap-1'>
+          {filterData.map((val) => (
+            <div
+              className=' pl-3 hover:bg-gray-100 active:bg-gray-200 rounded shadow'
+              onClick={() => handleShowCollege(val)}
+              key={val._id}
+              value={val}
+            >
+              {val.name}
             </div>
 
-            <Colleges collegeName={"Arya college of engineering"} Api={"https://jsonplaceholder.typicode.com/users"}></Colleges>
-
-
+          ))}
         </div>
-    )
-}
+        {college}
+      </div>
 
-export default Body
+      <Signin/>
+    </div>
+  );
+};
+
+export default Body;
