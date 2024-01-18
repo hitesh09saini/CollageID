@@ -1,7 +1,7 @@
 // Signin.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Login.css'
+
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +15,7 @@ const Signin = () => {
   };
 
   return (
-    <div className=" absolute max-w-md mx-auto mt-8 p-6 bg-white border rounded shadow-md">
+    <div className=" absolute sm:w-[400px] mx-auto mt-8 p-6 bg-white border rounded shadow-md">
       <h2 className="text-2xl font-bold mb-4">Sign In</h2>
       <form>
         <div className="mb-4">
@@ -63,16 +63,19 @@ const Signin = () => {
           />
         </div>
         <button
-          className="text-white py-2 px-4 rounded  hover:bg-blue-700"
+          className="bg-blue-600 text-white hover:bg-blue-500 py-2 px-4 rounded bg-blue-600"
           type="button"
           onClick={handleSignin}
         >
           Sign In
         </button>
+
+        <Link to="/login">
+          <p className='text-blue-600 hover:text-blue-400 active:text-red-600'> if you have account ? login</p>
+        </Link>
+
       </form>
-      <p className="mt-4">
-        {/* Don't have an account? <Link to="/signup">Sign up</Link> */}
-      </p>
+
     </div>
   );
 };
