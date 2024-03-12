@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 
 const ResetPassword = () => {
@@ -70,7 +70,6 @@ const ResetPassword = () => {
           <button type='submit' className='bg-blue-600 text-white p-2 hover:bg-blue-400'>
             Login 
           </button>
-          <Link className='text-blue-600 hover:text-blue-500 active:text-red-600' to="/reset-password"> Reset your password</Link>
           <p className='text-gray-500'>OTP is valid only for 3 minutes</p>
         </form>
   )

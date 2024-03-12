@@ -15,6 +15,7 @@ const Search = ()=>{
     const fetchData = async () => {
         try {
             const res = await axios.get('http://localhost:8000/api/v1/college/all');
+            console.log(res);
             setListResult(res.data);
         } catch (error) {
             setError("Error fetching colleges: " + error.message);
@@ -39,11 +40,9 @@ const Search = ()=>{
 
     useEffect(() => {
         fetchData();
-        // You can uncomment the lines below if needed
-        // if (filterData.length === 0) {
-        //     setError('Error');
-        // }
     }, []);
+
+
   return(
     <div className="flex flex-col justify-center items-center">
    <div className='input'>

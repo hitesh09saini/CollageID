@@ -1,21 +1,20 @@
-import axios from 'axios';
+
 import React, { useState } from 'react';
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import { apiVerifyOTP } from '../../ContextApi/userApis'
 
 const VerifyOtp = () => {
   const [user, setUser] = useState({
     email: '',
     otp: '',
   });
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/user/verifyOTP', {
-        user,
-      }, { withCredentials: true });
-
+      const response = await apiVerifyOTP(user);
       console.log('API Response:', response.data);
 
       if (response.data.success) {
@@ -25,7 +24,7 @@ const VerifyOtp = () => {
           email: '',
           otp: ''
         });
-        navigate('/login');
+        navigate('/search')
       } else {
         // Handle failure scenario or specific error messages
         console.error('Verification failed:', response.data.message);
@@ -40,7 +39,7 @@ const VerifyOtp = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='absolute flex flex-col mx-auto mt-8 p-6 bg-white border rounded shadow-md'
+      className='absolute max-sm:w-full max-md:p-2 sm:w-[400px] flex flex-col  md:p-6 bg-white border rounded shadow-md'
     >
       <input
         required
@@ -59,9 +58,9 @@ const VerifyOtp = () => {
         placeholder='OTP'
       />
       <button type='submit' className='bg-blue-600 text-white p-2 hover:bg-blue-400'>
-        Login 
+        Login
       </button>
-      <Link className='text-blue-600 hover:text-blue-500 active:text-red-600' to="/reset-password"> Reset your password</Link>
+      {/* <Link className='text-blue-600 hover:text-blue-500 active:text-red-600' to="/reset-password"> Reset your password</Link> */}
       <p className='text-gray-500'>OTP is valid only for 3 minutes</p>
     </form>
   );
